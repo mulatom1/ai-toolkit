@@ -1,7 +1,7 @@
 {
-  "name": "@mulatom1/ai-toolkit",
+  "name": "@mulatom1/tomsoft1-ai-toolkit",
   "version": "0.1.0",
-  "description": "10xChampion PoC: wersjonowane skille i reguły AI przez GitHub Packages",
+  "description": "Tomsoft1 AI Toolkit - Shared AI skills, prompts and rules for AI-assisted SDLC",
   "type": "module",
   "license": "MIT",
   "repository": {

@@ -1,89 +1,237 @@
-# 10xChampion — AI Toolkit (GitHub Packages)
+# tomsoft1 — AI Toolkit Workflow for App Developer (GitHub Packages)
 
-Starter projektu do zaliczenia M5L4. Zawiera **jeden przykładowy skill**, reguły, instalator/deinstalator i workflow publikacji. **Nie został jeszcze opublikowany na GitHubie.**
+**Reusable AI skills, prompts, and rules for AI-assisted Software Development Life Cycle (SDLC).**
 
-## Krok 1 — konto i repozytorium GitHub
+`tomsoft1 AI Toolkit` to niewielka, wersjonowana paczka narzędzi wspierających pracę programisty z AI. Umożliwia dostarczanie tych samych skilli i reguł do różnych projektów bez ręcznego kopiowania plików.
 
-Paczka jest już dopasowana do konta indywidualnego **mulatom1**:
+Projekt jest demonstracją podejścia **Shared AI Registry** z modułu M5L4 kursu 10xDevs i stanowi Proof of Concept (PoC) do ścieżki **10xChampion**.
 
-- Repozytorium: `https://github.com/mulatom1/ai-toolkit`
-- Nazwa paczki: `@mulatom1/ai-toolkit`
-- Rejestr: `https://npm.pkg.github.com`
+## 1. Informacje o projekcie
 
-Repozytorium `mulatom1/ai-toolkit` jest już utworzone na GitHubie, a podczas tworzenia dodano do niego licencję MIT. Ma więc już pierwszy commit. **Nie uruchamiaj `git init` ani nie próbuj nadpisywać historii repozytorium.**
+| Element | Wartość |
+| --- | --- |
+| Repozytorium | [mulatom1/ai-toolkit](https://github.com/mulatom1/ai-toolkit) |
+| Nazwa projektu | **tomsoft1 — AI Toolkit Workflow for App Developer** |
+| Nazwa paczki npm | `@mulatom1/tomsoft1-ai-toolkit` |
+| Rejestr | [GitHub Packages](https://npm.pkg.github.com) |
+| Wersja startowa nowej paczki | `0.1.0` |
+| Wymagane środowisko | Node.js 20+ (zalecany Node.js 22) |
+| Licencja | MIT |
 
-1. Pobierz i rozpakuj ten starter do **osobnego** katalogu; w środku znajdziesz folder `ai-toolkit/`.
-2. W terminalu, w wybranym katalogu roboczym, sklonuj istniejące repozytorium:
+> **Ważne:** Wcześniej opublikowano `@mulatom1/ai-toolkit@0.1.0`. Paczka `@mulatom1/tomsoft1-ai-toolkit` ma **inną nazwę techniczną** i jest osobnym pakietem. Sama zmiana README nie zmienia istniejącej paczki w rejestrze. Przed pierwszą publikacją pod nową nazwą sprawdź pole `name` w `package.json`. Nie traktuj publikacji nowego pakietu jako już wykonanej, dopóki nie potwierdzą jej logi GitHub Actions.
 
-   ```bash
-   git clone https://github.com/mulatom1/ai-toolkit.git
-   ```
-3. Skopiuj całą **zawartość** folderu `ai-toolkit/` ze startera do katalogu `ai-toolkit/` właśnie sklonowanego z GitHub. Zachowaj folder `.github` i plik `.gitignore`. **Nie usuwaj pliku `LICENSE`, który już jest na GitHubie.**
-4. Uruchom w sklonowanym repozytorium:
+## 2. Co zawiera paczka?
 
-   ```bash
-   cd ai-toolkit
-   npm test
-   npm pack --dry-run
-   git add .
-   git commit -m "feat: initial 10xChampion AI toolkit"
-   git push origin main
-   ```
+- **AI skill — Code Review:** przykładowy zestaw instrukcji dla asystenta AI przeglądającego kod.
+- **Wspólne reguły:** szablon reguł w `rules/CLAUDE.md`.
+- **Instalator CLI:** wgrywa skill i zarządzany fragment reguł do projektu.
+- **Deinstalator CLI:** usuwa zarządzane pliki, chroniąc ręcznie zmodyfikowany skill.
+- **Manifest:** zapisuje informacje o plikach zarządzanych przez toolkit.
+- **Testy automatyczne:** sprawdzają instalację, powtarzalność i bezpieczną deinstalację.
+- **GitHub Actions:** publikuje wersjonowaną paczkę do GitHub Packages.
 
-Przed komendą `git push` musisz być zalogowany do GitHuba przez Git Credential Manager lub GitHub CLI (`gh auth login`). Nie umieszczaj tokenów w kodzie ani adresie remote.
+Na obecnym etapie jest to **mały PoC**, a nie platforma do zarządzania użytkownikami, sekretami czy wieloma zespołami.
 
-## Krok 2 — lokalne sprawdzenie
+## 3. Struktura repozytorium
 
-Potrzebny jest Node.js 20+, zalecany 22.
+```text
+ai-toolkit/
+├── .github/
+│   └── workflows/
+│       └── publish-ai-toolkit.yml
+├── bin/
+│   └── ai-toolkit.mjs
+├── rules/
+│   └── CLAUDE.md
+├── skills/
+│   └── code-review/
+│       └── SKILL.md
+├── src/
+│   └── manager.mjs
+├── test/
+│   └── manager.test.mjs
+├── .gitignore
+├── LICENSE
+├── package.json
+└── README.md
+```
+
+## 4. Praca lokalna i testy
+
+Sklonuj istniejące repozytorium (nie trzeba wykonywać `git init`):
 
 ```bash
+git clone https://github.com/mulatom1/ai-toolkit.git
+cd ai-toolkit
 npm test
 npm pack --dry-run
 ```
 
-Możesz podmienić przykładowy skill na własny z kursu: `skills/code-review/SKILL.md`. Każdą regułę można zmienić w `rules/CLAUDE.md`.
+Przed publikacją sprawdź w `package.json`:
 
-## Krok 3 — publikacja
+```json
+{
+  "name": "@mulatom1/tomsoft1-ai-toolkit",
+  "version": "0.1.0",
+  "description": "tomsoft1 AI Toolkit - reusable AI skills and rules for AI-assisted SDLC",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}
+```
 
-1. Utwórz repozytorium `ai-toolkit` na **swoim osobistym koncie GitHub** (na początek najlepiej publiczne, o ile artefakty nie zawierają danych poufnych).
-2. Wypchnij pliki startera do gałęzi `main`.
-3. W **Actions** uruchom ręcznie workflow **Publish AI toolkit to GitHub Packages** przez `Run workflow` na gałęzi `main` (publikuje wersję `0.1.0`).
-4. W zakładce profilu GitHub `Packages` sprawdź paczkę `ai-toolkit`.
-5. Zmień wersję w `package.json` na `0.1.1`, wykonaj drobną zmianę w skillu, wypchnij zmiany i uruchom workflow ponownie.
-6. Zrób screenshoty: repozytorium lub widok workflow; definicja `package.json`; lista opublikowanych wersji. Jeśli paczka nie pokazuje się przy repozytorium, sprawdź zakładkę **Packages** na profilu `mulatom1`.
+Ten fragment pokazuje **pola do ustawienia**, a nie pełny `package.json`. Zachowaj również istniejące pola `type`, `license`, `repository`, `bin`, `files`, `scripts` i `engines`. Nazwa polecenia CLI pozostaje `ai-toolkit`, nawet jeśli nazwa paczki jest dłuższa.
 
-**Uwaga:** GitHub Packages nie pozwala opublikować tej samej wersji dwukrotnie (błąd 409). Nie uruchamiaj ponownie publikacji bez zmiany wersji. Publikacja z GitHub Actions korzysta z automatycznego `GITHUB_TOKEN` i `packages: write`; nie potrzebuje ręcznie tworzonego PAT. Przy pierwszej publikacji paczka może być prywatna domyślnie, nawet jeśli repo jest publiczne — sprawdź osobno jej widoczność.
+Oczekiwane wyniki lokalnych kontroli:
 
-## Krok 4 — użycie paczki w projekcie testowym
+- `npm test` — wszystkie testy przechodzą.
+- `npm pack --dry-run` — w paczce znajdują się pliki potrzebne do uruchomienia toolkitu.
 
-Na komputerze dewelopera GitHub npm registry wymaga logowania także do odczytu publicznych pakietów. Utwórz osobisty token **classic** z minimalnym zakresem `read:packages`, a następnie:
+## 5. Publikacja w GitHub Packages
+
+Repozytorium znajduje się na indywidualnym koncie GitHub `mulatom1`. Publikację obsługuje workflow:
+
+`.github/workflows/publish-ai-toolkit.yml`
+
+Workflow można uruchomić ręcznie przez **Actions → Publish AI toolkit to GitHub Packages → Run workflow**, wybierając gałąź `main`. Konfiguracja startera pozwala też uruchomić go po wypchnięciu taga `v*`.
+
+Przed uruchomieniem publikacji:
+
+1. Upewnij się, że `package.json` zawiera dokładnie `@mulatom1/tomsoft1-ai-toolkit` i właściwy numer wersji.
+2. Uruchom `npm test` i `npm pack --dry-run`.
+3. Zapisz zmiany w repozytorium:
+
+   ```bash
+   git add .
+   git commit -m "feat: brand package as tomsoft1 AI Toolkit"
+   git push origin main
+   ```
+
+4. Uruchom workflow **jeden raz** i sprawdź jego logi.
+5. W profilu [mulatom1](https://github.com/mulatom1) otwórz sekcję **Packages** i zweryfikuj nazwę oraz opublikowaną wersję.
+
+Przykładowy komunikat potwierdzający publikację **nowej nazwy**:
+
+```text
++ @mulatom1/tomsoft1-ai-toolkit@0.1.0
+```
+
+**Uwaga:** GitHub Packages nie pozwala zwyczajnie nadpisać wydanej wersji tego samego pakietu. Przed kolejnym wydaniem zwiększ numer wersji, np. z `0.1.0` na `0.1.1`. Publikacja z tego workflow używa `GITHUB_TOKEN` z uprawnieniem `packages: write`; nie zapisuj własnych tokenów w repozytorium.
+
+## 6. Instalacja w innym projekcie
+
+### 6.1. Logowanie do GitHub Packages
+
+GitHub npm registry wymaga uwierzytelnienia również podczas pobierania publicznych pakietów. Na komputerze programisty utwórz **Personal Access Token (classic)** z minimalnym zakresem `read:packages`, a następnie wykonaj:
 
 ```bash
 npm login --scope=@mulatom1 --auth-type=legacy --registry=https://npm.pkg.github.com
-# Login: nazwa użytkownika GitHub; hasło: PAT classic
 ```
 
-W osobnym projekcie testowym utwórz `.npmrc` zawierające **tylko**:
+Jako login wpisz użytkownika GitHub `mulatom1`, a jako hasło — token PAT (classic). Token przechowuj poza repozytorium. Nie wpisuj go do plików, które commitujesz.
 
-```
+### 6.2. Konfiguracja projektu-konsumenta
+
+W **osobnym projekcie testowym** dodaj plik `.npmrc`:
+
+```ini
 @mulatom1:registry=https://npm.pkg.github.com
 ```
 
-Zainstaluj paczkę i uruchom dostarczony przez nią instalator:
+Ten plik zawiera tylko adres rejestru dla scope `@mulatom1`, **bez tokena**.
+
+Zainstaluj opublikowaną paczkę:
 
 ```bash
-npm install @mulatom1/ai-toolkit@0.1.0
-npx ai-toolkit install
+npm install @mulatom1/tomsoft1-ai-toolkit@0.1.0
+npx --no-install ai-toolkit install
 ```
 
-Po wykonaniu powstaną `.claude/skills/code-review/SKILL.md` oraz zarządzany blok w `CLAUDE.md`. Uruchom `npx ai-toolkit install` ponownie — reguły nie powinny się zduplikować. Aby usunąć zarządzane pliki:
+Po udanej instalacji powinny powstać:
+
+```text
+projekt-testowy/
+├── .ai-toolkit/
+│   └── manifest.json
+├── .claude/
+│   └── skills/
+│       └── code-review/
+│           └── SKILL.md
+└── CLAUDE.md
+```
+
+W pliku `CLAUDE.md` reguły są umieszczane pomiędzy znacznikami:
+
+```text
+<!-- ai-toolkit:start -->
+...
+<!-- ai-toolkit:end -->
+```
+
+### 6.3. Sprawdzenie ponownej instalacji
 
 ```bash
-npx ai-toolkit uninstall
+npx --no-install ai-toolkit install
 ```
 
-Deinstalator nie usuwa ręcznie zmodyfikowanych skilli. Nie wpisuj PAT do repozytorium ani do commitowanej `.npmrc`.
+Ponowna instalacja nie powinna dublować zarządzanego bloku reguł. Jeśli skill został zmieniony ręcznie, instalator nie powinien go bez pytania nadpisać.
 
-## Uzasadnienie wyboru dla M5L4
+### 6.4. Deinstalacja
 
-Odbiorcą jest pojedynczy programista i symulowany zespół korzystający z GitHub. GitHub Packages zapewnia wersjonowanie i dystrybucję skilli bez osobnego serwera, AWS ani własnego API. Na potrzeby PoC publikujemy małą paczkę, testujemy instalację w drugim repo i dokumentujemy wydane wersje.
+```bash
+npx --no-install ai-toolkit uninstall
+```
+
+Deinstalator korzysta z manifestu, usuwa zarządzany fragment `CLAUDE.md` i usuwa skill **tylko wtedy, gdy nie został zmodyfikowany ręcznie**. Gdy wykryje ręczną zmianę skilla, przerywa operację zamiast usuwać go automatycznie.
+
+## 7. Wydawanie kolejnych wersji
+
+Po opublikowaniu wersji `0.1.0` pod nazwą `@mulatom1/tomsoft1-ai-toolkit`:
+
+1. Zmień zawartość wybranego skilla lub reguł i opisz zmianę w commicie.
+2. Zwiększ wersję:
+
+   ```bash
+   npm version patch --no-git-tag-version
+   npm test
+   npm pack --dry-run
+   ```
+
+3. Wypchnij zmiany:
+
+   ```bash
+   git add .
+   git commit -m "chore: release tomsoft1 AI Toolkit v0.1.1"
+   git push origin main
+   ```
+
+4. Uruchom workflow ręcznie na `main` (chyba że publikację wyzwoliłeś osobno tagiem).
+5. Sprawdź, czy **Packages** pokazuje obie wersje nowej paczki: `0.1.0` i `0.1.1`.
+
+Nie uruchamiaj równocześnie publikacji ręcznej i publikacji przez tag dla tej samej wersji.
+
+## 8. Dowody do 10xChampion (M5L4)
+
+Projekt realizuje scenariusz **Shared AI Registry**, czyli wersjonowanie i dystrybucję zespołowych artefaktów AI. Do udokumentowania projektu przygotuj zrzuty ekranu pokazujące:
+
+1. **Repozytorium lub rejestr** — widok repozytorium i/lub udanego workflow publikacji.
+2. **Definicję paczki** — `package.json` z nazwą paczki, wersją i konfiguracją GitHub Packages.
+3. **Listę wydanych wersji** — widok wersji paczki w GitHub Packages.
+
+Dodatkowo warto zachować wynik instalacji i deinstalacji w projekcie testowym oraz zielony wynik `npm test`. To przydatny dowód działania PoC, choć nie zastępuje wskazanych wyżej trzech kategorii.
+
+## 9. Dlaczego GitHub Packages?
+
+Odbiorcą rozwiązania jest indywidualny programista i symulowany zespół korzystający z GitHuba. GitHub Packages pozwala publikować i wersjonować wspólne skille oraz reguły bez stawiania osobnego serwera, AWS CodeArtifact czy własnego API. Niewielka paczka, instalator oraz test w drugim projekcie pozwalają sprawdzić cały przepływ dystrybucji przy minimalnym zakresie wdrożenia.
+
+## 10. Bezpieczeństwo i ograniczenia
+
+- Nie przechowuj PAT ani innych sekretów w kodzie, commitowanej `.npmrc` lub logach.
+- Publikuj wyłącznie własne materiały albo takie, do których masz odpowiednie prawa.
+- Sprawdzaj osobno widoczność paczki w GitHub Packages — publiczne repozytorium nie oznacza automatycznie publicznej paczki.
+- Narzędzie obsługuje obecnie jeden przykładowy skill `code-review` i jeden zestaw reguł; nie jest uniwersalnym menedżerem wszystkich skilli.
+- Przed pracą na rzeczywistym projekcie sprawdź działanie instalacji i deinstalacji na kopii testowej.
+
+## Licencja
+
+Projekt jest udostępniany na licencji [MIT](./LICENSE). Licencja dotyczy kodu i artefaktów, do których autor ma prawa.
