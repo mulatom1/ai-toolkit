@@ -1,16 +1,21 @@
 {
   "name": "@mulatom1/tomsoft1-ai-toolkit",
-  "version": "0.1.0",
-  "description": "Tomsoft1 AI Toolkit - Shared AI skills, prompts and rules for AI-assisted SDLC",
+  "version": "0.1.1",
+  "description": "Tomsoft1 AI Toolkit - reusable AI skills and rules for Claude Code and GitHub Copilot",
   "type": "module",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mulatom1/ai-toolkit.git"
+    "url": "git+https://github.com/mulatom1/ai-toolkit.git"
   },
-  "bin": {"ai-toolkit": "./bin/ai-toolkit.mjs"},
+  "bin": {
+    "ai-toolkit": "bin/ai-toolkit.mjs"
+  },
   "files": ["bin", "src", "skills", "rules", "README.md"],
-  "scripts": {"test": "node --test", "pack:check": "npm pack --dry-run"},
-  "engines": {"node": ">=20"},
-  "publishConfig": {"registry": "https://npm.pkg.github.com"}
+  "scripts": {
+    "test": "node --test",
+    "pack:check": "npm pack --dry-run"
+  },
+  "engines": { "node": ">=20" },
+  "publishConfig": { "registry": "https://npm.pkg.github.com" }
 }
