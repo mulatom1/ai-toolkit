@@ -174,12 +174,13 @@ Najpierw uruchom `ai-toolkit uninstall`, ponieważ samo `npm uninstall` usuwa pa
 ```text
 ai-toolkit/
 ├── .github/workflows/publish-ai-toolkit.yml
-├── bin/ai-toolkit.mjs
-├── src/manager.mjs
+├── bin/ai-toolkit.ts         (CLI, kompilowane do dist/bin)
+├── src/manager.ts           (logika, kompilowana do dist/src)
 ├── skills/code-review/SKILL.md
 ├── rules/CLAUDE.md
-├── test/manager.test.mjs
+├── test/manager.test.ts
 ├── package.json
+├── tsconfig.json
 └── README.md
 ```
 
@@ -190,6 +191,7 @@ Właścicielem źródła prawdy jest repozytorium paczki. Pliki w projektach-kon
 W katalogu repozytorium źródłowego `mulatom1/ai-toolkit`:
 
 ```powershell
+npm ci
 npm test
 npm pack --dry-run
 ```

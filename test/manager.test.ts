@@ -4,19 +4,19 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
-import { installTo, uninstallFrom } from '../src/manager.mjs';
+import { installTo, uninstallFrom } from '../src/manager.js';
 
-const newProject = () => fs.mkdtempSync(path.join(os.tmpdir(), 'tomsoft1-toolkit-'));
-const claudeSkill = (dir) => path.join(dir, '.claude/skills/code-review/SKILL.md');
-const copilotSkill = (dir) => path.join(dir, '.github/skills/code-review/SKILL.md');
-const claudeRules = (dir) => path.join(dir, 'CLAUDE.md');
-const copilotRules = (dir) => path.join(dir, '.github/copilot-instructions.md');
-const manifestFile = (dir) => path.join(dir, '.ai-toolkit/manifest.json');
-const read = (file) => fs.readFileSync(file, 'utf8');
-const digest = (s) => createHash('sha256').update(s).digest('hex');
+const newProject = (): string => fs.mkdtempSync(path.join(os.tmpdir(), 'tomsoft1-toolkit-'));
+const claudeSkill = (dir: string) => path.join(dir, '.claude/skills/code-review/SKILL.md');
+const copilotSkill = (dir: string) => path.join(dir, '.github/skills/code-review/SKILL.md');
+const claudeRules = (dir: string) => path.join(dir, 'CLAUDE.md');
+const copilotRules = (dir: string) => path.join(dir, '.github/copilot-instructions.md');
+const manifestFile = (dir: string) => path.join(dir, '.ai-toolkit/manifest.json');
+const read = (file: string): string => fs.readFileSync(file, 'utf8');
+const digest = (s: string): string => createHash('sha256').update(s).digest('hex');
 
 // Always restore test-created directories.
-function withProject(fn) {
+function withProject(fn: (projectDir: string) => void): void {
   const projectDir = newProject();
   try { return fn(projectDir); }
   finally { fs.rmSync(projectDir, { recursive: true, force: true }); }

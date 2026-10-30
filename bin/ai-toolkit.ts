@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { installTo, uninstallFrom } from '../src/manager.mjs';
+import { installTo, uninstallFrom } from '../src/manager.js';
 const command = process.argv[2];
 try {
   if (command === 'install') {
@@ -13,6 +13,7 @@ try {
     process.exitCode = command ? 1 : 0;
   }
 } catch (err) {
-  console.error(`Błąd ai-toolkit: ${err.message}`);
+  const message = err instanceof Error ? err.message : String(err);
+  console.error(`Błąd ai-toolkit: ${message}`);
   process.exitCode = 1;
 }
