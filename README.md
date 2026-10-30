@@ -214,17 +214,7 @@ Nie uruchamiaj publikacji ponownie dla tej samej wersji: GitHub Packages nie prz
 
 Workflow ma `packages: write` i korzysta z `GITHUB_TOKEN` (nie wymaga PAT do **publikacji**). PAT classic jest używany lokalnie jedynie przy **pobieraniu** paczki.
 
-## 7. Weryfikacja dla 10xChampion
-
-Zachowaj trzy kategorie dowodów opisane w module M5L4:
-
-1. Widok repozytorium/rejestru z działającym przepływem dystrybucji.
-2. Definicję paczki (`package.json`) z konfiguracją rejestru i wersją.
-3. Listę wydanych wersji (`0.1.0` i `0.1.1`) w GitHub Packages.
-
-Dodatkowo warto pokazać, że **jedna paczka instalowana jednym poleceniem** tworzy dwa katalogi skilli oraz reguły dla Claude Code i Copilota. To odróżnia ten PoC od zwykłego kopiowania plików.
-
-## 8. Bezpieczeństwo i licencja
+## 7. Bezpieczeństwo i licencja
 
 Nie commituj tokenów, nie kopiuj prywatnych instrukcji firmy bez uprawnień i testuj instalator na oddzielnym projekcie. Materiały przykładowe w paczce są demonstracyjne.
 
