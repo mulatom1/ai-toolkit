@@ -7,7 +7,8 @@ Wersjonowany zestaw skilli i reguł wspierających AI-assisted Software Developm
 - **Repozytorium:** https://github.com/mulatom1/ai-toolkit
 - **Paczka:** `@mulatom1/tomsoft1-ai-toolkit`
 - **Rejestr:** https://npm.pkg.github.com
-- **Wersja:** `0.1.1`
+- **Wersja:** `0.1.2`
+- **Język:** TypeScript (kompilowany przez `tsc` do `dist/`; paczka zawiera gotowy JavaScript)
 - **Node.js:** 20+ (zalecane 22)
 - **Licencja:** MIT (plik `LICENSE` w repozytorium)
 
@@ -74,11 +75,11 @@ Powstający `.npmrc` powinien zawierać wyłącznie:
 Następnie:
 
 ```powershell
-npm install @mulatom1/tomsoft1-ai-toolkit@0.1.1
+npm install @mulatom1/tomsoft1-ai-toolkit@0.1.2
 npx --no-install ai-toolkit install
 ```
 
-Wersja `0.1.1` musi najpierw zostać **rzeczywiście opublikowana** w GitHub Packages; przed publikacją wersji sprawdź instrukcję z sekcji 6.
+Wersja `0.1.2` musi najpierw zostać **rzeczywiście opublikowana** w GitHub Packages; przed publikacją wersji sprawdź instrukcję z sekcji 6.
 
 Sprawdź rezultat:
 
@@ -133,7 +134,7 @@ W katalogu projektu uruchom `copilot`. W aktywnej sesji możesz sprawdzić dost�
 Aby zaktualizować paczkę i ponownie rozdystrybuować artefakty:
 
 ```powershell
-npm install @mulatom1/tomsoft1-ai-toolkit@0.1.1
+npm install @mulatom1/tomsoft1-ai-toolkit@0.1.2
 npx --no-install ai-toolkit install
 ```
 
@@ -184,9 +185,11 @@ ai-toolkit/
 └── README.md
 ```
 
+Kod źródłowy jest napisany w **TypeScript**. `npm run build` (`tsc -p .`) kompiluje go do katalogu `dist/`, a skrypt `prepack` robi to automatycznie przed `npm pack` i `npm publish`. Do opublikowanej paczki trafia wyłącznie skompilowany JavaScript, więc konsument nie potrzebuje TypeScriptu.
+
 Właścicielem źródła prawdy jest repozytorium paczki. Pliki w projektach-konsumentach instaluje i usuwa polecenie CLI.
 
-## 6. Testy i publikacja nowej wersji `0.1.1`
+## 6. Testy i publikacja nowej wersji `0.1.2`
 
 W katalogu repozytorium źródłowego `mulatom1/ai-toolkit`:
 
@@ -207,10 +210,10 @@ git push origin main
 Otwórz zakładkę [GitHub Actions](https://github.com/mulatom1/ai-toolkit/actions), wybierz workflow **Publish AI toolkit to GitHub Packages** i uruchom **Run workflow** na `main`. Po jego zakończeniu oczekiwany zapis w logach:
 
 ```text
-+ @mulatom1/tomsoft1-ai-toolkit@0.1.1
++ @mulatom1/tomsoft1-ai-toolkit@0.1.2
 ```
 
-Nie uruchamiaj publikacji ponownie dla tej samej wersji: GitHub Packages nie przyjmuje nadpisania już wydanego numeru. Jeżeli `0.1.1` jest już opublikowana, podnieś wersję na kolejną wolną.
+Nie uruchamiaj publikacji ponownie dla tej samej wersji: GitHub Packages nie przyjmuje nadpisania już wydanego numeru. Jeżeli `0.1.2` jest już opublikowana, podnieś wersję na kolejną wolną.
 
 Workflow ma `packages: write` i korzysta z `GITHUB_TOKEN` (nie wymaga PAT do **publikacji**). PAT classic jest używany lokalnie jedynie przy **pobieraniu** paczki.
 
