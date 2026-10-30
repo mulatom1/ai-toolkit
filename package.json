@@ -1,6 +1,6 @@
 {
   "name": "@mulatom1/tomsoft1-ai-toolkit",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Tomsoft1 AI Toolkit - reusable AI skills and rules for Claude Code and GitHub Copilot",
   "type": "module",
   "license": "MIT",
